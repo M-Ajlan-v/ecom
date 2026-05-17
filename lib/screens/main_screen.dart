@@ -16,7 +16,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   int currentIndex = 0;
   final List<Widget> pages = [
     const HomeScreen(),
@@ -25,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     const OrdersScreen(),
     const ProfileScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +33,13 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           children: [
             const HomeTopSection(),
+            // Let the page fill remaining space but NOT force constraints
             Expanded(
-              child: Container(
-                color: AppTheme.scaffoldBg,
-                child: pages[currentIndex],
-              ),
+              child: pages[currentIndex],
             ),
           ],
         ),
       ),
-
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: currentIndex,
         onTap: (value) {

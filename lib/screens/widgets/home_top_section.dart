@@ -15,7 +15,6 @@ class HomeTopSection extends StatelessWidget {
 
       decoration: BoxDecoration(
         color: AppTheme.white,
-
         border: Border(
           bottom: BorderSide(
             color: AppTheme.border,
@@ -25,14 +24,11 @@ class HomeTopSection extends StatelessWidget {
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
-
           // logo
           Container(
             width: 42,
             height: 42,
-
             decoration: BoxDecoration(
               color: AppTheme.primary,
               borderRadius: BorderRadius.circular(12),
@@ -46,36 +42,29 @@ class HomeTopSection extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          // search field
           TextField(
             decoration: InputDecoration(
               hintText: "Search car parts...",
-
               prefixIcon: const Icon(
                 Icons.search,
                 color: AppTheme.textSecondary,
               ),
-
               filled: true,
               fillColor: Colors.white,
-
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 14,
               ),
-
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-
                 borderSide: BorderSide(
                   color: AppTheme.border,
                 ),
               ),
-
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-
                 borderSide: BorderSide(
-                  color: AppTheme.primary,
+                  width: 3,
+                  color: Colors.black,
                 ),
               ),
             ),

@@ -33,27 +33,22 @@ class CustomBottomNavBar extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined, size: 30),
-            activeIcon: Icon(Icons.home, size: 30),
             label: "Home",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_outlined, size: 30),
-            activeIcon: Icon(Icons.search, size: 30),
             label: "Search",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined, size: 30),
-            activeIcon: Icon(Icons.shopping_cart, size: 30),
             label: "Cart",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.inventory_2_outlined, size: 30),
-            activeIcon: Icon(Icons.inventory_2, size: 30),
             label: "Orders",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline, size: 30),
-            activeIcon: Icon(Icons.person, size: 30),
             label: "Profile",
           ),
         ],
