@@ -5,9 +5,13 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("order"),
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text("Orders")
+          ],
+        ),
       ),
     );
   }

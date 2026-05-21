@@ -9,7 +9,7 @@ class AppTheme {
   // Main Brand
   static const Color primary = Color(0xFFFF6A00);
   static const Color primaryRed = Color(0xFFFF0000);
-
+  static const Color bg = Color(0xFFF6f8fA);
   // Backgrounds
   static const Color scaffoldBg = Color(0xFFF3F3F3);
   static const Color white = Colors.white;

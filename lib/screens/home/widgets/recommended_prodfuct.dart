@@ -2,12 +2,12 @@ import 'package:ecom/data/product_data.dart';
 import 'package:ecom/screens/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
-class FastProducts extends StatelessWidget {
-  const FastProducts({super.key});
+class RecommendedForYou extends StatelessWidget {
+  const RecommendedForYou({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final hotProductsList = fastProductsList.where((product) => product.isHot).toList();
+    final recommendedList = fastProductsList.where((product) => product.condition == 'Like New').toList();
 
     return Column(
       children: [
@@ -16,10 +16,8 @@ class FastProducts extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(Icons.local_fire_department_outlined, color: const Color(0xFFFF6A00)),
-                const SizedBox(width: 10),
                 const Text(
-                  "Fast-Moving\nProducts",
+                  "Recommended For You",
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight(900),
@@ -53,13 +51,13 @@ class FastProducts extends StatelessWidget {
             mainAxisSpacing: 18,
             childAspectRatio: 0.5,
           ),
-          itemCount: hotProductsList.length,
+          itemCount: recommendedList.length,
           itemBuilder: (context, index) {
-            final product = hotProductsList[index];
+            final product = recommendedList[index];
             return ProductCard(
               product: product,
               showAddToCartButton: false,
-              showHotBadge: true,
+              showHotBadge: false,
             );
           },
         ),
