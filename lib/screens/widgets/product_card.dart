@@ -1,5 +1,8 @@
 import 'package:ecom/data/product_data.dart';
+import 'package:ecom/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:ecom/screens/product/product_details.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -15,27 +18,39 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: ProductDetailsScreen(product: product),
+            ),
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildImageSection(),
-          Expanded(
-            child: _buildDetailsSection(),
-          ),
-        ],
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildImageSection(),
+            Expanded(
+              child: _buildDetailsSection(context), 
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -118,7 +133,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsSection() {
+  Widget _buildDetailsSection(BuildContext context) { // ← ADD context HERE
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(
@@ -160,7 +175,7 @@ class ProductCard extends StatelessWidget {
           ),
           if (showAddToCartButton) ...[
             const SizedBox(height: 6),
-            _buildAddToCartButton(),
+            _buildAddToCartButton(context),
           ],
         ],
       ),
@@ -318,12 +333,22 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildAddToCartButton() {
+  Widget _buildAddToCartButton(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
     return SizedBox(
       width: double.infinity,
       height: 42,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: (){
+          cartProvider.addToCart(product);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${product.productTitle} added to cart'),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 1),
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 255, 64, 0),
@@ -333,10 +358,9 @@ class ProductCard extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.shopping_cart_outlined, color: Colors.white,size: 24,),
-            SizedBox(width: 8,),
+            const Icon(Icons.shopping_cart_outlined, color: Colors.white, size: 25),
+            const SizedBox(width: 4),
             const Text(
               'Add to Cart',
               style: TextStyle(

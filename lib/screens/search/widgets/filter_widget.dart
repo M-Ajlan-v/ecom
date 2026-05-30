@@ -32,7 +32,7 @@ class FilterContainer extends StatelessWidget {
     final List<String> brands = [
       'All Brands',
       ...{
-        ...fastProductsList.map(
+        ...ProductsList.map(
           (e) => e.carName.split(' ').first,
         ),
       },
@@ -41,7 +41,7 @@ class FilterContainer extends StatelessWidget {
     final List<String> categories = [
       'All Categories',
       ...{
-        ...fastProductsList.map((e) => e.category),
+        ...ProductsList.map((e) => e.category),
       },
     ];
 

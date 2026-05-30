@@ -7,7 +7,7 @@ class FastProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hotProductsList = fastProductsList.where((product) => product.isHot).toList();
+    final hotProductsList = ProductsList.where((product) => product.isHot).toList();
 
     return Column(
       children: [

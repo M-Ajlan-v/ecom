@@ -1,3 +1,4 @@
+// main_screen.dart
 import 'package:ecom/screens/cart/cart_screen.dart';
 import 'package:ecom/screens/home/home_screen.dart';
 import 'package:ecom/screens/orders/orders_screen.dart';
@@ -17,13 +18,22 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
+  
+  final GlobalKey<SearchScreenState> searchScreenKey = GlobalKey<SearchScreenState>();
+  
   final List<Widget> pages = [
     const HomeScreen(),
-    const SearchScreen(),
     const CartScreen(),
     const OrdersScreen(),
     const ProfileScreen(),
   ];
+
+  void performSearch(String query) {
+    setState(() {
+      currentIndex = 1;
+      searchScreenKey.currentState?.updateSearchQuery(query);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +42,18 @@ class _MainScreenState extends State<MainScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const HomeTopSection(),
-            // Let the page fill remaining space but NOT force constraints
+            HomeTopSection(
+              onTap: () {
+                setState(() {
+                  currentIndex = 1;
+                });
+              },
+              onSearch: performSearch,
+            ),
             Expanded(
-              child: pages[currentIndex],
+              child: currentIndex == 1 
+                  ? SearchScreen(key: searchScreenKey)
+                  : pages[currentIndex > 1 ? currentIndex - 1 : currentIndex],
             ),
           ],
         ),

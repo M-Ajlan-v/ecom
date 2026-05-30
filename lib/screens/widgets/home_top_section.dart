@@ -1,18 +1,21 @@
 // widgets/home_top_section.dart
-
 import 'package:ecom/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeTopSection extends StatelessWidget {
-  const HomeTopSection({super.key});
+  final VoidCallback? onTap;
+  final Function(String)? onSearch;
+  
+  const HomeTopSection({
+    this.onTap,
+    this.onSearch,
+    super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
-
       decoration: BoxDecoration(
         color: AppTheme.white,
         border: Border(
@@ -21,11 +24,9 @@ class HomeTopSection extends StatelessWidget {
           ),
         ),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // logo
           Container(
             width: 42,
             height: 42,
@@ -33,16 +34,19 @@ class HomeTopSection extends StatelessWidget {
               color: AppTheme.primary,
               borderRadius: BorderRadius.circular(12),
             ),
-
             child: const Icon(
               Icons.inventory_2_outlined,
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 14),
-
           TextField(
+            onTap: onTap,
+            onChanged: (value) {
+              if (onSearch != null) {
+                onSearch!(value);
+              }
+            },
             decoration: InputDecoration(
               hintText: "Search car parts...",
               prefixIcon: const Icon(

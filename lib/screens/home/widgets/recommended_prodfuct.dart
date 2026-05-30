@@ -7,7 +7,7 @@ class RecommendedForYou extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final recommendedList = fastProductsList.where((product) => product.condition == 'Like New').toList();
+    final recommendedList = ProductsList.where((product) => product.condition == 'Like New').toList();
 
     return Column(
       children: [
